@@ -1,0 +1,61 @@
+﻿@using Zip_Files_MVC.Models
+@model List<FileModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+
+            table th {
+                background-color: #F7F7F7;
+                color: #333;
+                font-weight: bold;
+            }
+
+            table th, table td {
+                padding: 5px;
+                border: 1px solid #ccc;
+            }
+    </style>
+</head>
+<body>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th></th>
+                <th>File Name</th>
+            </tr>
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td>@Html.CheckBoxFor(m => m[i].IsSelected)</td>
+                    <td>
+                        @Model[i].FileName
+                        @Html.HiddenFor(m => m[i].FilePath)
+                        @Html.HiddenFor(m => m[i].FileName)
+                    </td>
+                </tr>
+            }
+        </table>
+        <br />
+        <input type="submit" value="Download" />
+    }
+</body>
+</html>
